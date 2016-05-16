@@ -2,7 +2,7 @@ FROM php:5.6-apache
 
 MAINTAINER Catalin Anechei
 
-ENV PS_VERSION {PS_VERSION}
+ENV PS_VERSION 1.6.1.4 
 
 ENV PS_DOMAIN prestashop.local
 ENV PS_LANGUAGE en
