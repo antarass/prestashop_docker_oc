@@ -41,7 +41,7 @@ RUN echo mysql-server-5.6 mysql-server/root_password password $DB_PASSWD | debco
 RUN echo mysql-server-5.6 mysql-server/root_password_again password $DB_PASSWD | debconf-set-selections
 
 # Get PrestaShop
-ADD {PS_URL} /tmp/prestashop.zip
+ADD https://www.prestashop.com/ajax/controller.php?method=download&type=releases&file=prestashop_1.6.1.4.zip&language=en /tmp/prestashop.zip
 RUN unzip -q /tmp/prestashop.zip -d /tmp/ && mv /tmp/prestashop/* /var/www/html && rm /tmp/prestashop.zip
 COPY config_files/docker_updt_ps_domains.php /var/www/html/
 
