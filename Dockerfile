@@ -15,6 +15,14 @@ ENV PS_HANDLE_DYNAMIC_DOMAIN 0
 ENV PS_FOLDER_ADMIN admin
 ENV PS_FOLDER_INSTALL install
 
+# needed for Apache2 under Ubuntu
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_PID_FILE /var/run/apache2.pid
+ENV APACHE_RUN_DIR /var/run/apache2
+ENV APACHE_LOCK_DIR /var/lock/apache2
+#######################################
 
 # Avoid MySQL questions during installation
 ENV DEBIAN_FRONTEND noninteractive
@@ -61,6 +69,10 @@ RUN sed -e 's/Listen 80/Listen 8080/' -i /etc/apache2/apache2.conf /etc/apache2/
 
 # PHP configuration
 COPY config_files/php.ini /usr/local/etc/php/
+
+# needed for Apache2 under Ubuntu
+RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
+#######################################
 
 # Expose 8080 because 80 is allowed only for root
 EXPOSE 8080
